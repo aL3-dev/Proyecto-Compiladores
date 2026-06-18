@@ -1,14 +1,35 @@
-# Analizador Léxico — Proyecto Compiladores
+# Compilador PseudoC — Proyecto Compiladores
 
-Analizador léxico implementado en Python mediante un autómata finito determinista (AFD). Lee un archivo fuente, identifica los tokens y lexemas por línea, y escribe los códigos de token en un archivo de salida.
+Implementación de las fases de análisis léxico y sintáctico de PseudoC en Python. El analizador léxico usa un autómata finito determinista (AFD) para identificar tokens y lexemas; el analizador sintáctico es un descendente recursivo LL(1) que valida la secuencia de tokens según la gramática del lenguaje.
+
+## Estructura del repositorio
+
+```
+.
+├── analizadorLexico.py       # Analizador léxico (estados() + tokenizar())
+├── analizadorSintactico.py   # Analizador sintáctico LL(1) (una función por no terminal)
+├── main.py                   # Orquestador: corre el lexico y luego el sintactico
+├── prueba2.txt                # Código fuente PseudoC de entrada
+├── tokens2.txt                 # Salida generada por el lexico: tokens por linea
+└── README.md
+```
 
 ## Uso
 
+Ejecuta ambas fases en secuencia con un solo comando:
+
 ```bash
-python analizadorLexico.py
+python main.py
 ```
 
-El programa lee `prueba.txt` como entrada y escribe los tokens en `tokens.txt`.
+Esto corre primero `analizadorLexico.py`, que lee `prueba2.txt` y genera `tokens2.txt`; a continuación corre automáticamente `analizadorSintactico.py`, que lee ese mismo archivo de tokens y valida la estructura del programa.
+
+También se puede ejecutar cada fase por separado:
+
+```bash
+python analizadorLexico.py        # genera tokens2.txt a partir de prueba2.txt
+python analizadorSintactico.py    # valida tokens2.txt
+```
 
 ## Palabras reservadas
 
@@ -45,10 +66,3 @@ El programa lee `prueba.txt` como entrada y escribe los tokens en `tokens.txt`.
 | Igualdad        | `==` `!=` `=`        | 45, 46, 47     |
 | `,` `;` `(` `)` |                      | 48, 49, 50, 51 |
 | Error léxico    |                      | 53             |
-
-## Errores detectados
-
-- Números con ceros a la izquierda (`007`)
-- Número real sin dígito tras el punto (`1.`)
-- Cadena de texto sin cerrar
-- Caracteres no reconocidos (`@`, `!` suelto, etc.)
