@@ -9,8 +9,8 @@ Implementación de las fases de análisis léxico y sintáctico de PseudoC en Py
 ├── analizadorLexico.py       # Analizador léxico (estados() + tokenizar())
 ├── analizadorSintactico.py   # Analizador sintáctico LL(1) (una función por no terminal)
 ├── main.py                   # Orquestador: corre el lexico y luego el sintactico
-├── prueba2.txt                # Código fuente PseudoC de entrada
-├── tokens2.txt                 # Salida generada por el lexico: tokens por linea
+├── prueba.txt                # Código fuente PseudoC de entrada
+├── tokens.txt                 # Salida generada por el lexico: tokens por linea
 └── README.md
 ```
 
