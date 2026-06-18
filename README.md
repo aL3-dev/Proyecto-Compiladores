@@ -27,8 +27,8 @@ Esto corre primero `analizadorLexico.py`, que lee `prueba2.txt` y genera `tokens
 También se puede ejecutar cada fase por separado:
 
 ```bash
-python analizadorLexico.py        # genera tokens2.txt a partir de prueba2.txt
-python analizadorSintactico.py    # valida tokens2.txt
+python analizadorLexico.py        # genera tokens.txt a partir de prueba2.txt
+python analizadorSintactico.py    # valida tokens.txt
 ```
 
 ## Palabras reservadas
