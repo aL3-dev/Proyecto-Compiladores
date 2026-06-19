@@ -1,5 +1,9 @@
 # ============================================================
 # Analizador Sintactico Descendente Recursivo LL(1) 
+#L (Left-to-right): La cadena de entrada se lee de izquierda a derecha.
+# L (Leftmost derivation): Construye una derivación más a la izquierda.
+# 1 (One symbol lookahead): Utiliza exactamente un símbolo de anticipación 
+# para decidir qué regla aplicar, sin necesidad de retroceder
 # ============================================================
 tok = []
 lin = []
@@ -31,9 +35,7 @@ def error(msg):
     global e
     e = True
     if pos < n:
-        print("ERROR SINTACTICO -> linea", lin[pos], ":", msg)
-    elif n > 0:
-        print("ERROR SINTACTICO -> final de linea", lin[-1], ":", msg)
+        print("ERROR SINTACTICO -> linea", lin[pos-1], ":", msg)
     else:
         print("Error sintactico:", msg)
 
@@ -43,11 +45,13 @@ def verificar(t, desc=""):
     else:
         error("Se esperaba " + desc)
 
+#programa = "inicio" listaSentencias "fin" 
 def programa():
     verificar(20, "'inicio'")
     lista_sentencias()
     verificar(21, "'fin'")
 
+#sentencia = ( declaracion | asignacion | IO ) ";" | condicional | ciclo 
 def lista_sentencias():
     t = actual()
     if t in (22, 23, 24, 1000, 33, 34):
@@ -65,38 +69,44 @@ def lista_sentencias():
     else:
         error("Token inesperado")
         lista_sentencias()
-
+        
+#( declaracion | asignacion | IO ) ";"
 def sentencia_simple():
     t = actual()
     if t in (22, 23, 24):
         declaracion()
-    elif t == 1000:
+    elif t == 1000: 
         asignacion()
     elif t in (33, 34):
         io()
     else:
         error("Se esperaba declaracion, asignacion o entrada/salida")
 
+#declaracion = tipo listaVariables
 def declaracion():
     tipo()
     lista_variables()
 
+#tipo = "entero" | "real" | "cadena" 
 def tipo():
     if actual() not in (22, 23, 24):
         error("Se esperaba tipo (entero, real, cadena)")
     verificar(actual(), "tipo")
 
-def lista_variables():
+#listaVariables = variable { "," variable } 
+def lista_variables():  
     verificar(1000, "variable")
-    if actual() == 48:
-        verificar(48, "','")
+    if actual() == 48:  
+        verificar(48, "','") 
         lista_variables()
 
+#asignacion = variable "=" expresion   
 def asignacion():
     verificar(1000, "variable")
     verificar(47, "'='")
     expresion()
-
+    
+#IO = "leer" "(" variable ")" | "mostrar" "(" contenido ")" 
 def io():
     t = actual()
     if t == 33:
@@ -115,18 +125,22 @@ def io():
 def contenido():
     exp_concat()
 
+#expConcat = elementoConcat { "++" elementoConcat } 
 def exp_concat():
     elemento_concat()
     if actual() == 52:
         verificar(52, "'++'")
         exp_concat()
-
+        
+#elementoConcat = literal | variable | expresion 
 def elemento_concat():
     if actual() == 1:
         verificar(1, "literal")
     else:
         expresion()
-
+        
+#condicional = "si" "(" expRelacional ")" "inicio" listaSentencias "fin"  
+# { "sino" ["(" expRelacional ")"] "inicio" listaSentencias "fin" }
 def condicional():
     verificar(30, "'si'")
     verificar(50, "'('")
@@ -145,6 +159,7 @@ def condicional():
         lista_sentencias()
         verificar(21, "'fin'")
 
+#ciclo = "mientras" "(" expRelacional ")" "inicio" listaSentencias "fin"
 def ciclo():
     verificar(32, "'mientras'")
     verificar(50, "'('")
@@ -154,18 +169,21 @@ def ciclo():
     lista_sentencias()
     verificar(21, "'fin'")
 
+#expresion = termino { ( "+" | "-" ) termino } 
 def expresion():
     termino()
     while actual() in (37, 38):
         verificar(actual(), "'+' o '-'")
         termino()
 
+#termino = factor { ( "*" | "/" ) factor } 
 def termino():
     factor()
     while actual() in (39, 40):
         verificar(actual(), "'*' o '/'")
         factor()
 
+#factor = "(" expresion ")" | variable | numeros | funcion 
 def factor():
     t = actual()
     if t == 50:
@@ -181,6 +199,7 @@ def factor():
     else:
         error("Se esperaba factor")
 
+#funcion = ( "sen" | "cos" | "tan" | "raiz" ) "(" expresion ")" | "pi" 
 def funcion():
     t = actual()
     if t in (25, 26, 27, 28):
@@ -192,23 +211,25 @@ def funcion():
         verificar(29, "'pi'")
     else:
         error("Se esperaba funcion")
-
+        
+#expRelacional= expresion opRelacional expresion { opLogico expresion opRelacional expresion } 
 def exp_relacional():
     comparacion()
     while actual() in (35, 36):
         verificar(actual(), "'Y' o 'O'")
         comparacion()
 
+#opRelacional = "<" | ">" | "<=" | ">=" | "==" | "!=" 
 def comparacion():
     expresion()
     if actual() in (41, 42, 43, 44, 45, 46):
         verificar(actual(), "operador relacional")
-        expresion()
+        expresion() 
     else:
         error("Se esperaba operador relacional")
 
 # Programa principal
-leer_tokens("tokens2.txt")
+leer_tokens("error2.txt")
 
 if n == 0:
     print("Archivo de tokens vacio")
