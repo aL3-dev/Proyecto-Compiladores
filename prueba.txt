@@ -1,22 +1,8 @@
 inicio
-entero x, y;
-real pi2;
-x = 5;
-y = 007;
-pi2 = 3.14;
-mostrar('hola mundo');
-mostrar('hola2');
-si (x < 10) Y (y >= 2)
+entero x;
+x = 007;
+si (x > 5)
 inicio
-mostrar(x);
-sino
-inicio
-mostrar(y);
+mostrar(x)
 fin
-x = 1.;
-si (x != y)
-inicio
-x = raiz(x) + sen(pi);
-fin
-z = @y;
 fin

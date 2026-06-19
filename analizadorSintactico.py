@@ -1,3 +1,4 @@
+from analizadorLexico import ARCHIVO
 # ============================================================
 # Analizador Sintactico Descendente Recursivo LL(1) 
 #L (Left-to-right): La cadena de entrada se lee de izquierda a derecha.
@@ -19,6 +20,10 @@ def leer_tokens(entrada):
         for linea in f:
             num += 1
             for p in linea.strip().split():
+                valor = int(p)
+                if valor == 53:
+                    print("ERROR LEXICO -> linea:", num)
+                    continue
                 tok.append(int(p))
                 lin.append(num)
     n = len(tok)
@@ -64,10 +69,15 @@ def lista_sentencias():
     elif t == 32:
         ciclo()
         lista_sentencias()
+    elif t == 53:
+        print("ERROR LEXICO -> linea", lin[pos])
+        avanzar()
+        lista_sentencias()
     elif t in (21, 31, -1):
         return
     else:
         error("Token inesperado")
+        avanzar()
         lista_sentencias()
         
 #( declaracion | asignacion | IO ) ";"
@@ -229,7 +239,7 @@ def comparacion():
         error("Se esperaba operador relacional")
 
 # Programa principal
-leer_tokens("error2.txt")
+leer_tokens(ARCHIVO)
 
 if n == 0:
     print("Archivo de tokens vacio")

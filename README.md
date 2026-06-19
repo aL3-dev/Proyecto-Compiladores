@@ -16,20 +16,19 @@ Implementación de las fases de análisis léxico y sintáctico de PseudoC en Py
 
 ## Uso
 
+Ejecuta solo el analisis lexico
+
+```bash
+python analizadorLexico.py
+```
+
 Ejecuta ambas fases en secuencia con un solo comando:
 
 ```bash
-python main.py
+python analizadorSintactico.py
 ```
 
-Esto corre primero `analizadorLexico.py`, que lee `prueba2.txt` y genera `tokens2.txt`; a continuación corre automáticamente `analizadorSintactico.py`, que lee ese mismo archivo de tokens y valida la estructura del programa.
-
-También se puede ejecutar cada fase por separado:
-
-```bash
-python analizadorLexico.py        # genera tokens.txt a partir de prueba2.txt
-python analizadorSintactico.py    # valida tokens.txt
-```
+Esto corre primero `analizadorLexico.py`, que lee `prueba.txt` y genera `tokens.txt`; a continuación corre automáticamente `analizadorSintactico.py`, que lee ese mismo archivo de tokens y valida la estructura del programa.
 
 ## Palabras reservadas
 
@@ -62,7 +61,7 @@ python analizadorSintactico.py    # valida tokens.txt
 | Identificador   | nombre de variable   | 1000           |
 | `+` / `++`      | `+`, `++`            | 37, 52         |
 | `-` `*` `/`     | `-`, `*`, `/`        | 38, 39, 40     |
-| Relacionales    | `<` `<=` `>` `>=`   | 41, 42, 43, 44 |
+| Relacionales    | `<` `<=` `>` `>=`    | 41, 42, 43, 44 |
 | Igualdad        | `==` `!=` `=`        | 45, 46, 47     |
 | `,` `;` `(` `)` |                      | 48, 49, 50, 51 |
 | Error léxico    |                      | 53             |

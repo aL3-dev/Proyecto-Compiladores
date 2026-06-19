@@ -432,7 +432,9 @@ def tokenizar(cadena_linea, num_linea):
 # ============================================================
 # Lectura del codigo fuente y escritura de la lista de tokens
 # ============================================================
-with open(r"prueba.txt") as file, open(r"tokens.txt", "w") as out:
+ARCHIVO = "tokens.txt"
+
+with open(r"prueba.txt") as file, open(ARCHIVO, "w") as out:
 
     program = file.read().split("\n")
     linea = 0
