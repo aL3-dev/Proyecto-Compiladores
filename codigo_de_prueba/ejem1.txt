@@ -1,0 +1,9 @@
+inicio
+entero a, b, x;
+real res;
+a = 10;
+b = 5;
+x=2;
+res = ( a + ( 4 - 2 ) * b ) / x;
+mostrar(res);
+fin

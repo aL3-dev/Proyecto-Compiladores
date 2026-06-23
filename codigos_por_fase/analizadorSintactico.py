@@ -93,7 +93,7 @@ def sentencia_simple():
         error("Se esperaba declaracion, asignacion o entrada/salida")
 
 #declaracion = tipo listaVariables
-def declaracion():
+def declaracion(): 
     tipo()
     lista_variables()
 
@@ -105,7 +105,7 @@ def tipo():
 
 #listaVariables = variable { "," variable } 
 def lista_variables():  
-    verificar(1000, "variable")
+    verificar(1000, "variable") 
     if actual() == 48:  
         verificar(48, "','") 
         lista_variables()

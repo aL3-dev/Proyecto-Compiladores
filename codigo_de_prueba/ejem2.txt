@@ -1,0 +1,15 @@
+inicio
+entero x, y, mayor;
+x = 15;
+y = 8;
+si (x > y)
+inicio
+mayor = x;
+mostrar(mayor);
+fin
+sino
+inicio
+mayor = y;
+mostrar(mayor);
+fin
+fin

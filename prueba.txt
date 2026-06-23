@@ -1,8 +1,9 @@
 inicio
-entero x;
-x = 007;
-si (x > 5)
+entero x, y;
+x = 2;
+z=10
+si x > 6)
 inicio
+a = 5
 mostrar(x)
-fin
 fin

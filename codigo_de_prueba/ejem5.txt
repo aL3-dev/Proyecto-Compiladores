@@ -1,0 +1,13 @@
+inicio
+real x, seno, coseno, tangente;
+x = 30;
+seno = sen(x);
+coseno = cos(x);
+tangente = tan(x);
+mostrar('seno');
+mostrar(seno);
+mostrar('coseno');
+mostrar(coseno);
+mostrar('tangente');
+mostrar(tangente);
+fin

@@ -1,0 +1,11 @@
+inicio
+entero n, res;
+n = 5;
+res = 1;
+mientras (n > 0)
+inicio
+res = res * n;
+n = n - 1;
+fin
+mostrar(res);
+fin

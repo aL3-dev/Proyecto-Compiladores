@@ -1,0 +1,12 @@
+# Codigo Intermedio - Cuartetos
+#     Operador     Operando1        Operando2        Resultado
+------------------------------------------------------------
+1     DECL         entero           _                x
+2     DECL         entero           _                y
+3     DECL         entero           _                z
+4     DECL         real             _                a
+5     DECL         real             _                b
+6     DECL         real             _                c
+7     DECL         cadena           _                cad
+8     DECL         cadena           _                tex
+9     =            5                _                x
