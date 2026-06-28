@@ -33,8 +33,7 @@ def actual():
 
 def avanzar():
     global pos
-    if pos < n:
-        pos += 1
+    if pos < n: pos += 1
 
 def error(msg):
     global e

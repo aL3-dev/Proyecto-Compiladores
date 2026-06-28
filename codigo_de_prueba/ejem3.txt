@@ -1,6 +1,6 @@
 inicio
 entero n, res;
-n = 5;
+n = 7;
 res = 1;
 mientras (n > 0)
 inicio

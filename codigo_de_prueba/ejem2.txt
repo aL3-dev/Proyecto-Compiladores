@@ -1,6 +1,6 @@
 inicio
 entero x, y, mayor;
-x = 15;
+x = 17;
 y = 8;
 si (x > y)
 inicio

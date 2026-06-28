@@ -1,9 +1,11 @@
 inicio
-entero x, y;
+entero x, y, z, a;
+real s;
 x = 2;
-z=10
-si x > 6)
+s = 67 + 5.89;
+si (x > 6)
 inicio
-a = 5
-mostrar(x)
+a = 5;
+mostrar(x);
+fin
 fin

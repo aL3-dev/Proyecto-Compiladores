@@ -73,10 +73,8 @@ def estados():
         if es_reservada(lex) != -1:
             return 2
         return 3
-
     if estado == 2:                       # confirmo que es reservada
         return 3
-
     if estado == 4:                       # numero, antes del punto
         if c.isdigit():
             if lex == "0":

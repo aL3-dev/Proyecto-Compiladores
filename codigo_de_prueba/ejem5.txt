@@ -1,6 +1,6 @@
 inicio
 real x, seno, coseno, tangente;
-x = 30;
+x = 45;
 seno = sen(x);
 coseno = cos(x);
 tangente = tan(x);

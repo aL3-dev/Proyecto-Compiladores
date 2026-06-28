@@ -149,16 +149,16 @@ numeros         = ( digitoNocero [ numero ] | "0" ) [ "." numero ]
 
 ```
 inicio
-entero n, resultado;
+entero n, res;
 n = 5;
 resultado = 1;
 mientras (n > 0)
 inicio
-    resultado = resultado * n;
+    resultado = res * n;
     n = n - 1;
 fin
 mostrar('el factorial es');
-mostrar(resultado);
+mostrar(res);
 fin
 ```
 

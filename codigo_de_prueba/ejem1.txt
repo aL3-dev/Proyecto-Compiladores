@@ -4,6 +4,6 @@ real res;
 a = 10;
 b = 5;
 x=2;
-res = ( a + ( 4 - 2 ) * b ) / x;
+res = ( a + ( 5 - 2 ) * b ) / x;
 mostrar(res);
 fin

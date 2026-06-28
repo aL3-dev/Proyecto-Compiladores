@@ -104,14 +104,12 @@ def semantico():
                       ": incompatibilidad de tipos — variable '" + nombre_var +
                       "' es " + tipo_var + " pero se asigna " + tipo_expr)
             k += 1
- 
         elif tok == 1000:
             if buscar_var(lx) is None:
                 sem_e = True
                 print("ERROR SEMANTICO -> linea", lin,
                       ": variable '" + lx + "' no declarada")
             k += 1
- 
         else:
             k += 1
  

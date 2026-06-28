@@ -469,22 +469,29 @@ def comparacion():
 # ============================================================
 # FASE 3: Analisis Semantico
 # ============================================================
+ci_pos = 0
+ci_n = 0
+cuartetos = []
+temp_count = 0
+etiqueta = 0
+sem_e = False
+tabla_simbolos = []
+
 def semantico():
     global sem_e, tabla_simbolos
     tabla_simbolos = []
     sem_e = False
     n_tok = len(all_tokens)
     k = 0
- 
     pila_ambitos = [{}]
     contador_id  = [0]
- 
+
     def buscar_var(nombre):
         for ambito in reversed(pila_ambitos):
             if nombre in ambito:
                 return ambito[nombre]["tipo"]
         return None
- 
+
     def declarar_var(nombre, tipo, linea):
         global sem_e
         ambito_actual = pila_ambitos[-1]
@@ -588,16 +595,6 @@ def semantico():
 # ============================================================
 # FASE 4: CÓDIGO INTERMEDIO (Cuartetos + Notación Polaca Inversa)
 # ============================================================
-
-ci_pos      = 0
-ci_n        = 0
-cuartetos   = []
-temp_count  = 0
-etiqueta = 0
-sem_e         = False
-tabla_simbolos = []
-
-
 def ci_lex():  
     return all_lexemas[ci_pos] if ci_pos < ci_n else "_"
 
@@ -664,8 +661,6 @@ def infija_a_posfija():
                         (29, "pi"),
                         )
             nombre = next((n for k, n in funciones if k == t), "?")
-            #nombre = {25:"sen",26:"cos",27:"tan",
-            #         28:"raiz",29:"pi"}.get(t,"?")
             ci_ver(t)
             if t == 29:                                 # pi: constante
                 infija.append("pi")
@@ -702,7 +697,6 @@ def infija_a_posfija():
         pila_ids.pop()
 
     return infija, posfija
-
 
 # ------------------------------------------------------------
 # PASO 2: Posfija → Cuartetos
@@ -801,7 +795,8 @@ def gen_io():
         emitir("MOSTRAR", res, "_", "_")
 
 
-def gen_contenido():   return gen_exp_concat()
+def gen_contenido():   
+    return gen_exp_concat()
 
 
 def gen_exp_concat():
@@ -865,25 +860,33 @@ def gen_ciclo():
 def gen_lista_sentencias():
     t = actual(ci_pos)
     if t in (22, 23, 24):
-        gen_declaracion(); ci_ver(49); gen_lista_sentencias()
+        gen_declaracion()
+        ci_ver(49)
+        gen_lista_sentencias()
     elif t == 1000:
-        gen_asignacion(); ci_ver(49); gen_lista_sentencias()
+        gen_asignacion(); ci_ver(49) 
+        gen_lista_sentencias()
     elif t in (33, 34):
-        gen_io(); ci_ver(49); gen_lista_sentencias()
+        gen_io(); ci_ver(49)
+        gen_lista_sentencias()
     elif t == 30:
-        gen_condicional(); gen_lista_sentencias()
+        gen_condicional()
+        gen_lista_sentencias()
     elif t == 32:
-        gen_ciclo(); gen_lista_sentencias()
+        gen_ciclo()
+        gen_lista_sentencias()
     elif t in (21, 31, -1):
         return
 
 
 def gen_programa():
-    ci_ver(20); gen_lista_sentencias(); ci_ver(21)
+    ci_ver(20)
+    gen_lista_sentencias()
+    ci_ver(21)
 
 
 def mostrar_y_guardar(salida):
-    print("\n" + "=" * 60)
+    print("=" * 60)
     print("CODIGO INTERMEDIO - CUARTETOS")
     print("=" * 60)
     encabezado = f"{'#':<5} {'Operador':<12} {'Operando1':<16} {'Operando2':<16} {'Resultado'}"
